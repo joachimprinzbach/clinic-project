@@ -32,7 +32,27 @@
     </div>
     <div class="col-md-6">
       <card>
-        <h1>ยอดขายเดือนนี้</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <h1>ยอดขาย</h1>
+          </div>
+          <div class="col-md-6 text-right">
+            <el-select
+              class="select-danger"
+              placeholder="กรุณาเลือกช่วงเวลา"
+              v-model="selects.simple"
+            >
+              <el-option
+                v-for="option in selects.languages"
+                class="select-danger"
+                :value="option.value"
+                :label="option.label"
+                :key="option.label"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
         <line-chart
           style="height: 100%;"
           :chart-data="purpleLineChart.chartData"
@@ -45,7 +65,27 @@
     </div>
     <div class="col-md-6">
       <card>
-        <h1>กำไร</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <h1>กำไร</h1>
+          </div>
+          <div class="col-md-6 text-right">
+            <el-select
+              class="select-danger"
+              placeholder="กรุณาเลือกช่วงเวลา"
+              v-model="selects.simple"
+            >
+              <el-option
+                v-for="option in selects.languages"
+                class="select-danger"
+                :value="option.value"
+                :label="option.label"
+                :key="option.label"
+              >
+              </el-option>
+            </el-select>
+          </div>
+        </div>
         <bar-chart
           style="height: 100%;"
           :chart-data="blueBarChart.chartData"
@@ -63,8 +103,11 @@ import LineChart from "src/components/Charts/LineChart";
 import BarChart from "src/components/Charts/BarChart";
 import PieChart from "src/components/Charts/PieChart";
 import { Card } from "src/components";
+import { Select, Option } from "element-ui";
 export default {
   components: {
+    [Select.name]: Select,
+    [Option.name]: Option,
     LineChart,
     BarChart,
     PieChart,
@@ -72,6 +115,16 @@ export default {
   },
   data() {
     return {
+      selects: {
+        simple: "",
+        languages: [
+          { value: "วันนี้", label: "วันนี้" },
+          { value: "เมื่อวานนี้", label: "เมื่อวานนี้" },
+          { value: "7 วันที่แล้ว", label: "7 วันที่แล้ว" },
+          { value: "28 วันที่แล้ว", label: "28 วันที่แล้ว" },
+          { value: "6 เดือนที่แล้ว", label: "6 เดือนที่แล้ว" },
+        ],
+      },
       pieChart1: {
         chartData: {
           labels: [1, 2],

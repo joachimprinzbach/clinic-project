@@ -25,6 +25,9 @@
             </el-date-picker>
           </base-input>
         </div>
+        <div class="col-md-1">
+          <base-button type="primary" block>ค้นหา</base-button>
+        </div>
       </div>
     </card>
     <card>
@@ -54,7 +57,7 @@
               sortable
             >
             </el-table-column>
-            <el-table-column min-width="200" prop="sort" label="เวลา" sortable>
+            <el-table-column min-width="200" prop="time" label="เวลา" sortable>
             </el-table-column>
             <el-table-column
               min-width="200"
@@ -113,28 +116,33 @@ export default {
       tableData: [
         {
           id: 1,
-          name: "Dakota Rice",
-          sort: 1,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยทั่วไป",
+          time: "17.00",
         },
         {
           id: 2,
-          name: "Minerva Hooper",
-          sort: 2,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยทั่วไป",
+          time: "17.00",
         },
         {
           id: 3,
-          name: "Sage Rodriguez",
-          sort: 3,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยทั่วไป",
+          time: "17.00",
         },
         {
           id: 4,
-          name: "Philip Chaney",
-          sort: 4,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยทั่วไป",
+          time: "17.00",
         },
         {
           id: 5,
-          name: "Doris Greene",
-          sort: 5,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยทั่วไป",
+          time: "17.00",
         },
       ],
     };

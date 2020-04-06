@@ -36,7 +36,7 @@
             </el-table-column>
             <el-table-column
               min-width="200"
-              prop="email"
+              prop="tel"
               label="เบอร์โทร"
               sortable
             >
@@ -95,28 +95,38 @@ export default {
       tableData: [
         {
           id: 1,
-          name: "Dakota Rice",
-          sort: 1,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยธรรมดา",
+          email: "jirakarnjim1@gmail.com",
+          tel: "065-8528414",
         },
         {
           id: 2,
-          name: "Minerva Hooper",
-          sort: 2,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยธรรมดา",
+          email: "jirakarnjim1@gmail.com",
+          tel: "065-8528414",
         },
         {
           id: 3,
-          name: "Sage Rodriguez",
-          sort: 3,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยธรรมดา",
+          email: "jirakarnjim1@gmail.com",
+          tel: "065-8528414",
         },
         {
           id: 4,
-          name: "Philip Chaney",
-          sort: 4,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยธรรมดา",
+          email: "jirakarnjim1@gmail.com",
+          tel: "065-8528414",
         },
         {
           id: 5,
-          name: "Doris Greene",
-          sort: 5,
+          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+          category: "ป่วยธรรมดา",
+          email: "jirakarnjim1@gmail.com",
+          tel: "065-8528414",
         },
       ],
     };

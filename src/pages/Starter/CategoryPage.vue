@@ -81,27 +81,27 @@ export default {
       tableData: [
         {
           id: 1,
-          name: "Dakota Rice",
+          name: "ป่วยธรรมดา",
           sort: 1,
         },
         {
           id: 2,
-          name: "Minerva Hooper",
+          name: "ป่วยพิเศษ",
           sort: 2,
         },
         {
           id: 3,
-          name: "Sage Rodriguez",
+          name: "เป็นไข้",
           sort: 3,
         },
         {
           id: 4,
-          name: "Philip Chaney",
+          name: "ขาหัก",
           sort: 4,
         },
         {
           id: 5,
-          name: "Doris Greene",
+          name: "ปอดบวม",
           sort: 5,
         },
       ],
