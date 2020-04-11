@@ -1,33 +1,31 @@
 <template>
   <div class="row">
     <div class="col-md-3">
-      <card class="text-center">
+      <card class="text-center my-stats">
         <h1>ยอดขายวันนี้</h1>
         <h1>50</h1>
       </card>
     </div>
     <div class="col-md-3">
-      <card class="text-center">
+      <card class="text-center my-stats">
         <h1>จำนวนเคสวันนี้</h1>
         <h1>12</h1>
       </card>
     </div>
     <div class="col-md-3">
-      <card class="text-center">
+      <card class="text-center my-stats">
         <h1>การนัดหมายพรุ่งนี้</h1>
         <h1>50</h1>
       </card>
     </div>
     <div class="col-md-3">
-      <card class="text-center">
+      <card class="text-center my-stats">
         <h1>หมวดหมู่ยอดนิยม</h1>
         <pie-chart
-          style="height: 100%;"
           :chart-data="pieChart1.chartData"
           :extra-options="pieChart1.extraOptions"
-          :height="120"
-        >
-        </pie-chart>
+          :height="100"
+        ></pie-chart>
       </card>
     </div>
     <div class="col-md-6">
@@ -48,8 +46,7 @@
                 :value="option.value"
                 :label="option.label"
                 :key="option.label"
-              >
-              </el-option>
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -59,8 +56,7 @@
           :gradient-color="purpleLineChart.gradientColors"
           :gradient-stops="purpleLineChart.gradientStops"
           :extra-options="purpleLineChart.extraOptions"
-        >
-        </line-chart>
+        ></line-chart>
       </card>
     </div>
     <div class="col-md-6">
@@ -81,8 +77,7 @@
                 :value="option.value"
                 :label="option.label"
                 :key="option.label"
-              >
-              </el-option>
+              ></el-option>
             </el-select>
           </div>
         </div>
@@ -92,12 +87,18 @@
           :gradient-color="blueBarChart.gradientColors"
           :gradient-stops="blueBarChart.gradientStops"
           :extra-options="blueBarChart.extraOptions"
-        >
-        </bar-chart>
+        ></bar-chart>
       </card>
     </div>
   </div>
 </template>
+
+<style scoped>
+.my-stats {
+  height: 200px;
+}
+</style>
+
 <script>
 import LineChart from "src/components/Charts/LineChart";
 import BarChart from "src/components/Charts/BarChart";
@@ -111,7 +112,7 @@ export default {
     LineChart,
     BarChart,
     PieChart,
-    Card,
+    Card
   },
   data() {
     return {
@@ -122,8 +123,8 @@ export default {
           { value: "เมื่อวานนี้", label: "เมื่อวานนี้" },
           { value: "7 วันที่แล้ว", label: "7 วันที่แล้ว" },
           { value: "28 วันที่แล้ว", label: "28 วันที่แล้ว" },
-          { value: "6 เดือนที่แล้ว", label: "6 เดือนที่แล้ว" },
-        ],
+          { value: "6 เดือนที่แล้ว", label: "6 เดือนที่แล้ว" }
+        ]
       },
       pieChart1: {
         chartData: {
@@ -135,14 +136,14 @@ export default {
               pointHoverRadius: 0,
               backgroundColor: ["#00c09d", "#e2e2e2"],
               borderWidth: 0,
-              data: [60, 40],
-            },
-          ],
+              data: [60, 40]
+            }
+          ]
         },
         extraOptions: {
           maintainAspectRatio: false,
           legend: {
-            display: false,
+            display: false
           },
           responsive: true,
           cutoutPercentage: 70,
@@ -154,7 +155,7 @@ export default {
             xPadding: 12,
             mode: "nearest",
             intersect: 0,
-            position: "nearest",
+            position: "nearest"
           },
 
           scales: {
@@ -162,14 +163,14 @@ export default {
               {
                 display: 0,
                 ticks: {
-                  display: false,
+                  display: false
                 },
                 gridLines: {
                   drawBorder: false,
                   zeroLineColor: "transparent",
-                  color: "rgba(255,255,255,0.05)",
-                },
-              },
+                  color: "rgba(255,255,255,0.05)"
+                }
+              }
             ],
 
             xAxes: [
@@ -179,21 +180,21 @@ export default {
                 gridLines: {
                   drawBorder: false,
                   color: "rgba(255,255,255,0.1)",
-                  zeroLineColor: "transparent",
+                  zeroLineColor: "transparent"
                 },
                 ticks: {
-                  display: false,
-                },
-              },
-            ],
-          },
-        },
+                  display: false
+                }
+              }
+            ]
+          }
+        }
       },
       blueBarChart: {
         extraOptions: {
           maintainAspectRatio: false,
           legend: {
-            display: false,
+            display: false
           },
           responsive: true,
           tooltips: {
@@ -204,7 +205,7 @@ export default {
             xPadding: 12,
             mode: "nearest",
             intersect: 0,
-            position: "nearest",
+            position: "nearest"
           },
           scales: {
             yAxes: [
@@ -212,30 +213,30 @@ export default {
                 gridLines: {
                   drawBorder: false,
                   color: "rgba(29,140,248,0.1)",
-                  zeroLineColor: "transparent",
+                  zeroLineColor: "transparent"
                 },
                 ticks: {
                   suggestedMin: 60,
                   suggestedMax: 120,
                   padding: 20,
-                  fontColor: "#9e9e9e",
-                },
-              },
+                  fontColor: "#9e9e9e"
+                }
+              }
             ],
             xAxes: [
               {
                 gridLines: {
                   drawBorder: false,
                   color: "rgba(29,140,248,0.1)",
-                  zeroLineColor: "transparent",
+                  zeroLineColor: "transparent"
                 },
                 ticks: {
                   padding: 20,
-                  fontColor: "#9e9e9e",
-                },
-              },
-            ],
-          },
+                  fontColor: "#9e9e9e"
+                }
+              }
+            ]
+          }
         },
         chartData: {
           labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
@@ -247,23 +248,23 @@ export default {
               borderWidth: 2,
               borderDash: [],
               borderDashOffset: 0.0,
-              data: [53, 20, 10, 80, 100, 45],
-            },
-          ],
+              data: [53, 20, 10, 80, 100, 45]
+            }
+          ]
         },
         gradientColors: [
           "rgba(29,140,248,0.2)",
           "rgba(29,140,248,0.0)",
-          "rgba(29,140,248,0)",
+          "rgba(29,140,248,0)"
         ],
-        gradientStops: [1, 0.4, 0],
+        gradientStops: [1, 0.4, 0]
       },
 
       purpleLineChart: {
         extraOptions: {
           maintainAspectRatio: false,
           legend: {
-            display: false,
+            display: false
           },
           responsive: true,
           tooltips: {
@@ -274,7 +275,7 @@ export default {
             xPadding: 12,
             mode: "nearest",
             intersect: 0,
-            position: "nearest",
+            position: "nearest"
           },
           scales: {
             yAxes: [
@@ -283,15 +284,15 @@ export default {
                 gridLines: {
                   drawBorder: false,
                   color: "rgba(29,140,248,0.0)",
-                  zeroLineColor: "transparent",
+                  zeroLineColor: "transparent"
                 },
                 ticks: {
                   suggestedMin: 50,
                   suggestedMax: 110,
                   padding: 20,
-                  fontColor: "#ff8a76",
-                },
-              },
+                  fontColor: "#ff8a76"
+                }
+              }
             ],
 
             xAxes: [
@@ -300,15 +301,15 @@ export default {
                 gridLines: {
                   drawBorder: false,
                   color: "rgba(220,53,69,0.1)",
-                  zeroLineColor: "transparent",
+                  zeroLineColor: "transparent"
                 },
                 ticks: {
                   padding: 20,
-                  fontColor: "#ff8a76",
-                },
-              },
-            ],
-          },
+                  fontColor: "#ff8a76"
+                }
+              }
+            ]
+          }
         },
         chartData: {
           labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
@@ -327,12 +328,12 @@ export default {
               pointHoverRadius: 4,
               pointHoverBorderWidth: 15,
               pointRadius: 4,
-              data: [80, 100, 70, 80, 120, 80],
-            },
-          ],
-        },
-      },
+              data: [80, 100, 70, 80, 120, 80]
+            }
+          ]
+        }
+      }
     };
-  },
+  }
 };
 </script>

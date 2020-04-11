@@ -34,7 +34,15 @@
         </sidebar-item>
         <sidebar-item
           :link="{
-            name: $t('คนไข้'),
+            name: $t('สัตว์เลี้ยง'),
+            icon: 'tim-icons icon-heart-2',
+            path: '/pet',
+          }"
+        >
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: $t('เจ้าของ'),
             icon: 'tim-icons icon-bullet-list-67',
             path: '/patient',
           }"
@@ -45,6 +53,14 @@
             name: $t('การนัดหมาย'),
             icon: 'tim-icons icon-email-85',
             path: '/booking',
+          }"
+        >
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: $t('ประเภทสัตว์เลี้ยง'),
+            icon: 'tim-icons icon-atom',
+            path: '/type',
           }"
         >
         </sidebar-item>
@@ -87,7 +103,6 @@
           <router-view></router-view>
         </zoom-center-transition>
       </div>
-      <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>
   </div>
 </template>

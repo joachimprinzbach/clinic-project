@@ -3,10 +3,12 @@
     <card>
       <div class="row">
         <div class="col-md-12">
-          <router-link to="/user/create"
-            ><base-button type="success">สร้าง</base-button></router-link
-          >
+          <router-link to="/pet/create">
+            <base-button type="success">สร้าง</base-button>
+          </router-link>
         </div>
+      </div>
+      <div class="row">
         <div class="col-md-12">
           <el-table
             :data="
@@ -18,41 +20,15 @@
             "
           >
             <el-table-column min-width="50" type="index"></el-table-column>
-            <el-table-column
-              min-width="250"
-              prop="name"
-              label="ชื่อ-นามสกุล"
-              sortable
-            >
-            </el-table-column>
-            <el-table-column
-              min-width="200"
-              prop="email"
-              label="อีเมลล์"
-              sortable
-            >
-            </el-table-column>
-            <el-table-column
-              min-width="200"
-              prop="tel"
-              label="เบอร์โทร"
-              sortable
-            >
-            </el-table-column>
-            <el-table-column
-              min-width="200"
-              header-align="right"
-              label="จัดการ"
-            >
+            <el-table-column min-width="250" prop="name" label="ชื่อสัตว์เลี้ยง" sortable></el-table-column>
+            <el-table-column min-width="200" prop="type" label="ชนิด" sortable></el-table-column>
+            <el-table-column min-width="200" prop="owner" label="เจ้าของ" sortable></el-table-column>
+            <el-table-column min-width="200" header-align="right" label="จัดการ">
               <template slot="header" slot-scope="scope">
                 <el-input v-model="search" size="mini" placeholder="ค้นหา" />
               </template>
               <div slot-scope="{ row }" class="text-right">
-                <el-tooltip
-                  content="รายละเอียด"
-                  :open-delay="300"
-                  placement="top"
-                >
+                <el-tooltip content="รายละเอียด" :open-delay="300" placement="top">
                   <base-button type="info" size="sm" icon>
                     <i class="tim-icons icon-single-02"></i>
                   </base-button>
@@ -85,7 +61,7 @@ export default {
   components: {
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
-    BaseButton,
+    BaseButton
   },
   data() {
     return {
@@ -93,24 +69,30 @@ export default {
       tableData: [
         {
           id: 1,
-          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
-          email: "jirakarnjim1@gmail.com",
-          tel: "065-8528414",
+          name: "Brownie",
+          type: "แมว",
+          owner: "ปิยะกานตร์ นิมมากุลวิรัตน์",
         },
         {
           id: 2,
-          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
-          email: "jirakarnjim4@gmail.com",
-          tel: "065-8528414",
+          name: "Brownie",
+          type: "แมว",
+          owner: "ปิยะกานตร์ นิมมากุลวิรัตน์",
         },
         {
           id: 3,
-          name: "ปิยะกานตร์ นิมมากุลวิรัตน์",
-          email: "mysornsod@gmail.com",
-          tel: "065-8528414",
+          name: "Brownie",
+          type: "แมว",
+          owner: "ปิยะกานตร์ นิมมากุลวิรัตน์",
         },
-      ],
+        {
+          id: 4,
+          name: "Brownie",
+          type: "แมว",
+          owner: "ปิยะกานตร์ นิมมากุลวิรัตน์",
+        },
+      ]
     };
-  },
+  }
 };
 </script>

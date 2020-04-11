@@ -3,7 +3,7 @@
     <card>
       <div class="row">
         <div class="col-md-12">
-          <router-link to="/"
+          <router-link to="/category/create"
             ><base-button type="success">สร้าง</base-button></router-link
           >
         </div>
