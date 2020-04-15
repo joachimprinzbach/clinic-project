@@ -10,41 +10,9 @@
       <template slot-scope="props" slot="links">
         <sidebar-item
           :link="{
-            name: $t('แดชบอร์ด'),
-            icon: 'tim-icons icon-chart-pie-36',
-            path: '/dashboard',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('เริ่มการรักษา'),
-            icon: 'tim-icons icon-zoom-split',
-            path: '/diagnose',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('การรักษาทั้งหมด'),
-            icon: 'tim-icons icon-paper',
-            path: '/cure',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('สัตว์เลี้ยง'),
-            icon: 'tim-icons icon-heart-2',
-            path: '/pet',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('เจ้าของ'),
+            name: $t('ลูกค้า'),
             icon: 'tim-icons icon-bullet-list-67',
-            path: '/patient',
+            path: '/patient'
           }"
         >
         </sidebar-item>
@@ -52,31 +20,7 @@
           :link="{
             name: $t('การนัดหมาย'),
             icon: 'tim-icons icon-email-85',
-            path: '/booking',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('ประเภทสัตว์เลี้ยง'),
-            icon: 'tim-icons icon-atom',
-            path: '/type',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('หมวดหมู่'),
-            icon: 'tim-icons icon-components',
-            path: '/category',
-          }"
-        >
-        </sidebar-item>
-        <sidebar-item
-          :link="{
-            name: $t('ผู้ใช้งาน'),
-            icon: 'tim-icons icon-single-02',
-            path: '/user',
+            path: '/booking'
           }"
         >
         </sidebar-item>
@@ -84,7 +28,15 @@
           :link="{
             name: $t('ตั่งค่าระบบ'),
             icon: 'tim-icons icon-settings-gear-63',
-            path: '/setting',
+            path: '/setting'
+          }"
+        >
+        </sidebar-item>
+        <sidebar-item
+          :link="{
+            name: $t('แดชบอร์ด'),
+            icon: 'tim-icons icon-chart-pie-36',
+            path: '/dashboard'
           }"
         >
         </sidebar-item>
@@ -139,11 +91,11 @@ export default {
     SidebarFixedToggleButton,
     DashboardContent,
     SlideYDownTransition,
-    ZoomCenterTransition,
+    ZoomCenterTransition
   },
   data() {
     return {
-      sidebarBackground: "blue", //vue|blue|orange|green|red|primary
+      sidebarBackground: "blue" //vue|blue|orange|green|red|primary
     };
   },
   methods: {
@@ -165,11 +117,11 @@ export default {
       } else {
         docClasses.add("perfect-scrollbar-off");
       }
-    },
+    }
   },
   mounted() {
     this.initScrollbar();
-  },
+  }
 };
 </script>
 <style lang="scss">
