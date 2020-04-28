@@ -61,7 +61,7 @@
             <div class="col-md-12">
               <el-table
                 :data="
-                  tableData.filter(
+                  categoryLists.filter(
                     data =>
                       !search ||
                       data.name.toLowerCase().includes(search.toLowerCase())
@@ -117,7 +117,12 @@
                     </el-tooltip>
 
                     <el-tooltip content="ลบ" :open-delay="300" placement="top">
-                      <base-button type="danger" size="sm" icon>
+                      <base-button
+                        @click="deleteCategory(row._id)"
+                        type="danger"
+                        size="sm"
+                        icon
+                      >
                         <i class="tim-icons icon-simple-remove"></i>
                       </base-button>
                     </el-tooltip>
@@ -141,7 +146,7 @@
             <div class="col-md-12">
               <el-table
                 :data="
-                  tableData.filter(
+                  typeLists.filter(
                     data =>
                       !search ||
                       data.name.toLowerCase().includes(search.toLowerCase())
@@ -195,7 +200,12 @@
                     </el-tooltip>
 
                     <el-tooltip content="ลบ" :open-delay="300" placement="top">
-                      <base-button type="danger" size="sm" icon>
+                      <base-button
+                        @click="deleteType(row._id)"
+                        type="danger"
+                        size="sm"
+                        icon
+                      >
                         <i class="tim-icons icon-simple-remove"></i>
                       </base-button>
                     </el-tooltip>
@@ -219,7 +229,7 @@
             <div class="col-md-12">
               <el-table
                 :data="
-                  tableData.filter(
+                  userLists.filter(
                     data =>
                       !search ||
                       data.name.toLowerCase().includes(search.toLowerCase())
@@ -229,7 +239,7 @@
                 <el-table-column min-width="50" type="index"></el-table-column>
                 <el-table-column
                   min-width="250"
-                  prop="name"
+                  prop="fullname"
                   label="ชื่อ-นามสกุล"
                   sortable
                 >
@@ -282,7 +292,12 @@
                     </el-tooltip>
 
                     <el-tooltip content="ลบ" :open-delay="300" placement="top">
-                      <base-button type="danger" size="sm" icon>
+                      <base-button
+                        @click="deleteUser(row._id)"
+                        type="danger"
+                        size="sm"
+                        icon
+                      >
                         <i class="tim-icons icon-simple-remove"></i>
                       </base-button>
                     </el-tooltip>
@@ -298,6 +313,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { Select, Option, Table, TableColumn } from "element-ui";
 import { Card, BaseSwitch, ImageUpload, BaseButton } from "src/components";
 export default {
@@ -311,6 +327,11 @@ export default {
     [TableColumn.name]: TableColumn,
     BaseButton
   },
+  mounted() {
+    this.getTypeLists();
+    this.getCategoryLists();
+    this.getUserLists();
+  },
   data() {
     return {
       switches: true,
@@ -323,6 +344,9 @@ export default {
         ]
       },
       search: "",
+      typeLists: [],
+      categoryLists: [],
+      userLists: [],
       tableData: [
         {
           id: 1,
@@ -355,6 +379,46 @@ export default {
   methods: {
     ChangeDarkmode() {
       this.switches = !this.switches;
+    },
+    getTypeLists() {
+      axios.get(process.env.VUE_APP_MAIN_API + "/api/type").then(response => {
+        this.typeLists = response.data.data;
+      });
+    },
+    getCategoryLists() {
+      axios
+        .get(process.env.VUE_APP_MAIN_API + "/api/category")
+        .then(response => {
+          console.log(response.data);
+          this.categoryLists = response.data.data;
+        });
+    },
+    getUserLists() {
+      axios.get(process.env.VUE_APP_MAIN_API + "/api/user").then(response => {
+        console.log(response.data);
+        this.userLists = response.data.data;
+      });
+    },
+    deleteCategory(id) {
+      axios
+        .delete(process.env.VUE_APP_MAIN_API + "/api/category/" + id)
+        .then(response => {
+          this.getCategoryLists();
+        });
+    },
+    deleteType(id) {
+      axios
+        .delete(process.env.VUE_APP_MAIN_API + "/api/type/" + id)
+        .then(response => {
+          this.getTypeLists();
+        });
+    },
+    deleteUser(id) {
+      axios
+        .delete(process.env.VUE_APP_MAIN_API + "/api/user/" + id)
+        .then(response => {
+          this.getUserLists();
+        });
     }
   }
 };

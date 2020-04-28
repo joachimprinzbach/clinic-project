@@ -3,12 +3,37 @@
     <div class="row">
       <div class="col-md-6">
         <Card>
-          <base-input label="ชื่อ-นามสกุล" type="text" placeholder="กรุณากรอกชื่อ-นามสกุล"></base-input>
-          <base-input label="เบอร์โทร" type="text" placeholder="กรุณากรอกเบอร์โทร"></base-input>
-          <base-input label="อีเมลล์" type="email" placeholder="กรุณากรอกอีเมลล์"></base-input>
-          <base-input label="พาสเวิร์ด" type="password" placeholder="กรุณากรอกพาสเวิร์ด"></base-input>
-          <base-input label="ยืนยันพาสเวิร์ด" type="password" placeholder="กรุณายืนยันพาสเวิร์ด"></base-input>
-          <base-button class="w-100 mt-4">สร้าง</base-button>
+          <base-input
+            v-model="fullname"
+            label="ชื่อ-นามสกุล"
+            type="text"
+            placeholder="กรุณากรอกชื่อ-นามสกุล"
+          ></base-input>
+          <base-input
+            v-model="tel"
+            label="เบอร์โทร"
+            type="tel"
+            placeholder="กรุณากรอกเบอร์โทร"
+          ></base-input>
+          <base-input
+            v-model="email"
+            label="อีเมลล์"
+            type="email"
+            placeholder="กรุณากรอกอีเมลล์"
+          ></base-input>
+          <base-input
+            v-model="password"
+            label="พาสเวิร์ด"
+            type="password"
+            placeholder="กรุณากรอกพาสเวิร์ด"
+          ></base-input>
+          <base-input
+            v-model="password_again"
+            label="ยืนยันพาสเวิร์ด"
+            type="password"
+            placeholder="กรุณายืนยันพาสเวิร์ด"
+          ></base-input>
+          <base-button @click="create()" class="w-100 mt-4">สร้าง</base-button>
         </Card>
       </div>
     </div>
@@ -16,6 +41,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import { Select, Option } from "element-ui";
 import { Card, BaseButton, ImageUpload } from "src/components";
 export default {
@@ -27,27 +53,25 @@ export default {
   },
   data() {
     return {
-      images: {
-        regular: null
-      },
-      selects: {
-        simple: "",
-        type: [
-          { value: "Bahasa Indonesia", label: "แมว" },
-          { value: "Bahasa Melayu", label: "สุนัข" },
-          { value: "Català", label: "นก" }
-        ],
-        owner: [
-          { value: "Jimmy", label: "จิมมี่" },
-          { value: "Jame", label: "เจม" },
-          { value: "Pete", label: "พีท" }
-        ]
-      }
+      fullname: "",
+      tel: "",
+      email: "",
+      password: ""
     };
   },
   methods: {
-    onImageChange(file) {
-      this.images.regular = file;
+    create() {
+      axios
+        .post(process.env.VUE_APP_MAIN_API + "/api/user", {
+          fullname: this.fullname,
+          tel: this.tel,
+          email: this.email,
+          password: this.password,
+          password_again: this.password_again
+        })
+        .then(response => {
+          console.log(response.data);
+        });
     }
   }
 };
