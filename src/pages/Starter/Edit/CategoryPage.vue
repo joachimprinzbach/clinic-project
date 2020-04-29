@@ -30,7 +30,7 @@
             placeholder="กรุณาใส่ลำดับ"
             v-model="sort"
           ></base-input>
-          <base-button @click="create()" class="w-100 mt-4">สร้าง</base-button>
+          <base-button @click="edit()" class="w-100 mt-4">แก้ไข</base-button>
         </Card>
       </div>
     </div>
@@ -49,8 +49,7 @@ export default {
     [Option.name]: Option
   },
   mounted() {
-    window.scrollTo(0, 0)
-    this.getTypeLists();
+    this.getCategoryInfo();
   },
   data() {
     return {
@@ -67,20 +66,33 @@ export default {
     onImageChange(file) {
       this.images.regular = file;
     },
-    getTypeLists() {
-      axios.get(process.env.VUE_APP_MAIN_API + "/api/type").then(response => {
-        this.typeLists = response.data.data;
-      });
-    },
-    create() {
+    getCategoryInfo() {
       axios
-        .post(process.env.VUE_APP_MAIN_API + "/api/category", {
-          name: this.name,
-          type: this.type,
-          sort: this.sort
-        })
+        .get(
+          process.env.VUE_APP_MAIN_API +
+            "/api/category/" +
+            this.$route.params.id
+        )
         .then(response => {
-          console.log(response.data);
+          this.name = response.data.data.name;
+          this.type = response.data.data.type;
+          this.sort = response.data.data.sort;
+        });
+    },
+    edit() {
+      axios
+        .put(
+          process.env.VUE_APP_MAIN_API +
+            "/api/category/" +
+            this.$route.params.id,
+          {
+            name: this.name,
+            type: this.type,
+            sort: this.sort
+          }
+        )
+        .then(response => {
+          this.$router.push("/setting");
         });
     }
   }

@@ -15,7 +15,7 @@
             type="number"
             placeholder="กรุณาใส่ลำดับ"
           ></base-input>
-          <base-button @click="create()" class="w-100 mt-4">สร้าง</base-button>
+          <base-button @click="edit()" class="w-100 mt-4">แก้ไข</base-button>
         </Card>
       </div>
     </div>
@@ -28,7 +28,7 @@ import { Select, Option } from "element-ui";
 import { Card, BaseButton } from "src/components";
 export default {
   mounted() {
-    window.scrollTo(0, 0);
+    this.getTypeInfo();
   },
   components: {
     Card,
@@ -42,14 +42,27 @@ export default {
     };
   },
   methods: {
-    create() {
+    edit() {
       axios
-        .post(process.env.VUE_APP_MAIN_API + "/api/type", {
-          name: this.name,
-          sort: this.sort
-        })
+        .put(
+          process.env.VUE_APP_MAIN_API + "/api/type/" + this.$route.params.id,
+          {
+            name: this.name,
+            sort: this.sort
+          }
+        )
         .then(response => {
-          console.log(response.data);
+          this.$router.push("/setting");
+        });
+    },
+    getTypeInfo() {
+      axios
+        .get(
+          process.env.VUE_APP_MAIN_API + "/api/type/" + this.$route.params.id
+        )
+        .then(response => {
+          this.name = response.data.data.name;
+          this.sort = response.data.data.sort;
         });
     }
   }

@@ -12,10 +12,13 @@ import Patient from "./../pages/Starter/PatientPage.vue";
 import Booking from "./../pages/Starter/BookingPage.vue";
 import Type from "./../pages/Starter/TypePage.vue";
 import TypeCreate from "./../pages/Starter/Create/TypePage.vue";
+import TypeEdit from "./../pages/Starter/Edit/TypePage.vue";
 import Category from "./../pages/Starter/CategoryPage.vue";
 import CategoryCreate from "./../pages/Starter/Create/CategoryPage.vue";
+import CategoryEdit from "./../pages/Starter/Edit/CategoryPage.vue";
 import User from "./../pages/Starter/UserPage.vue";
 import UserCreate from "./../pages/Starter/Create/UserPage.vue";
+import UserEdit from "./../pages/Starter/Edit/UserPage.vue";
 import Setting from "./../pages/Starter/SettingPage.vue";
 
 Vue.use(Router);
@@ -84,6 +87,11 @@ export default new Router({
           components: { default: TypeCreate }
         },
         {
+          path: "type/:id/edit",
+          name: "แก้ไขประเภท",
+          components: { default: TypeEdit }
+        },
+        {
           path: "category",
           name: "หมวดหมู่",
           components: { default: Category }
@@ -94,14 +102,24 @@ export default new Router({
           components: { default: CategoryCreate }
         },
         {
+          path: "category/:id/edit",
+          name: "แก้ไขหมวดหมู่",
+          components: { default: CategoryEdit }
+        },
+        {
           path: "user",
           name: "ผู้ใช้งาน",
           components: { default: User }
         },
         {
           path: "user/create",
-          name: "ผู้ใช้งาน",
+          name: "สร้างผู้ใช้งาน",
           components: { default: UserCreate }
+        },
+        {
+          path: "user/:id/edit",
+          name: "แก้ไขผู้ใช้งาน",
+          components: { default: UserEdit }
         },
         {
           path: "setting",

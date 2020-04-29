@@ -4,11 +4,10 @@
       <div class="col-md-6">
         <card>
           <h3>โลโก้</h3>
-          <image-upload
-            class="w-100"
-            @change="onImageChange"
-            select-text="Select Image"
-          />
+          <dropzone-upload @image="dropzoneUpload"></dropzone-upload>
+          <base-button @click="changeSystemLogo()" type="success" block
+            >ยินยัน</base-button
+          >
         </card>
       </div>
       <div class="col-md-6">
@@ -16,7 +15,14 @@
           <div class="col-md-12">
             <card>
               <h3>ชื่อระบบ</h3>
-              <base-input type="text" placeholder="กรุณากรอกชื่อระบบ" />
+              <base-input
+                v-model="systemName"
+                type="text"
+                placeholder="กรุณากรอกชื่อระบบ"
+              />
+              <base-button @click="changeSystemName()" type="success" block
+                >ยินยัน</base-button
+              >
             </card>
           </div>
           <div class="col-md-6">
@@ -26,6 +32,9 @@
                 @click="ChangeDarkmode()"
                 v-model="switches"
               ></base-switch>
+              <base-button @click="changeSystemMode()" type="success" block
+                >ยินยัน</base-button
+              >
             </card>
           </div>
           <div class="col-md-6">
@@ -34,16 +43,19 @@
               <el-select
                 class="select-danger w-100"
                 placeholder="เลือกธีมหลัก"
-                v-model="selects.simple"
+                v-model="theme"
               >
                 <el-option
-                  v-for="option in selects.languages"
+                  v-for="option in selects.theme"
                   class="select-danger"
                   :value="option.value"
                   :label="option.label"
                   :key="option.label"
                 ></el-option>
               </el-select>
+              <base-button @click="changeSystemColor()" type="success" block
+                >ยินยัน</base-button
+              >
             </card>
           </div>
         </div>
@@ -105,17 +117,17 @@
                         <i class="tim-icons icon-single-02"></i>
                       </base-button>
                     </el-tooltip>
-
-                    <el-tooltip
-                      content="แก้ไข"
-                      :open-delay="300"
-                      placement="top"
-                    >
-                      <base-button type="success" size="sm" icon>
-                        <i class="tim-icons icon-settings"></i>
-                      </base-button>
-                    </el-tooltip>
-
+                    <router-link :to="'/category/' + row._id + '/edit'">
+                      <el-tooltip
+                        content="แก้ไข"
+                        :open-delay="300"
+                        placement="top"
+                      >
+                        <base-button type="success" size="sm" icon>
+                          <i class="tim-icons icon-settings"></i>
+                        </base-button>
+                      </el-tooltip>
+                    </router-link>
                     <el-tooltip content="ลบ" :open-delay="300" placement="top">
                       <base-button
                         @click="deleteCategory(row._id)"
@@ -188,16 +200,17 @@
                         <i class="tim-icons icon-single-02"></i>
                       </base-button>
                     </el-tooltip>
-
-                    <el-tooltip
-                      content="แก้ไข"
-                      :open-delay="300"
-                      placement="top"
-                    >
-                      <base-button type="success" size="sm" icon>
-                        <i class="tim-icons icon-settings"></i>
-                      </base-button>
-                    </el-tooltip>
+                    <router-link :to="'/type/' + row._id + '/edit'">
+                      <el-tooltip
+                        content="แก้ไข"
+                        :open-delay="300"
+                        placement="top"
+                      >
+                        <base-button type="success" size="sm" icon>
+                          <i class="tim-icons icon-settings"></i>
+                        </base-button>
+                      </el-tooltip>
+                    </router-link>
 
                     <el-tooltip content="ลบ" :open-delay="300" placement="top">
                       <base-button
@@ -280,17 +293,17 @@
                         <i class="tim-icons icon-single-02"></i>
                       </base-button>
                     </el-tooltip>
-
-                    <el-tooltip
-                      content="แก้ไข"
-                      :open-delay="300"
-                      placement="top"
-                    >
-                      <base-button type="success" size="sm" icon>
-                        <i class="tim-icons icon-settings"></i>
-                      </base-button>
-                    </el-tooltip>
-
+                    <router-link :to="'/user/' + row._id + '/edit'">
+                      <el-tooltip
+                        content="แก้ไข"
+                        :open-delay="300"
+                        placement="top"
+                      >
+                        <base-button type="success" size="sm" icon>
+                          <i class="tim-icons icon-settings"></i>
+                        </base-button>
+                      </el-tooltip>
+                    </router-link>
                     <el-tooltip content="ลบ" :open-delay="300" placement="top">
                       <base-button
                         @click="deleteUser(row._id)"
@@ -331,18 +344,22 @@ export default {
     this.getTypeLists();
     this.getCategoryLists();
     this.getUserLists();
+    this.getSystemStyles();
   },
   data() {
     return {
       switches: true,
       selects: {
         simple: "",
-        languages: [
+        theme: [
           { value: "green", label: "เขียว" },
           { value: "blue", label: "นำ้เงิน" },
           { value: "red", label: "แดง" }
         ]
       },
+      logo: [],
+      systemName: "",
+      theme: "",
       search: "",
       typeLists: [],
       categoryLists: [],
@@ -377,6 +394,9 @@ export default {
     };
   },
   methods: {
+    dropzoneUpload(data) {
+      this.logo = data;
+    },
     ChangeDarkmode() {
       this.switches = !this.switches;
     },
@@ -419,6 +439,43 @@ export default {
         .then(response => {
           this.getUserLists();
         });
+    },
+    changeSystemName() {
+      axios
+        .put(process.env.VUE_APP_MAIN_API + "/api/system/name", {
+          name: this.systemName
+        })
+        .then(response => {});
+    },
+    getSystemStyles() {
+      axios.get(process.env.VUE_APP_MAIN_API + "/api/system").then(response => {
+        console.log(response.data);
+        this.systemName = response.data.data.name;
+        this.switches = response.data.data.darkmode;
+        this.theme = response.data.data.theme;
+      });
+    },
+    changeSystemMode() {
+      axios
+        .put(process.env.VUE_APP_MAIN_API + "/api/system/darkmode", {
+          darkmode: this.switches
+        })
+        .then(response => {});
+    },
+    changeSystemColor() {
+      axios
+        .put(process.env.VUE_APP_MAIN_API + "/api/system/theme", {
+          theme: this.theme
+        })
+        .then(response => {});
+    },
+    changeSystemLogo() {
+      console.log(this.logo);
+      axios
+        .put(process.env.VUE_APP_MAIN_API + "/api/system/logo", {
+          logo: this.logo
+        })
+        .then(response => {});
     }
   }
 };
